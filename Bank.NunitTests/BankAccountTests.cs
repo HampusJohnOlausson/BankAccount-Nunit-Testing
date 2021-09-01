@@ -19,5 +19,19 @@ namespace Bank.NunitTests
             Assert.AreEqual(1500, account.Balance);
 
         }
+
+        [Test]
+        public void Withdrawing_Funds_Updates_Balance()
+        {
+            // Arrange
+            var account = new BankAccount(1000);
+
+            // Act
+            account.Withdraw(500);
+
+            // Assert
+            Assert.AreEqual(500, account.Balance);
+
+        }
     }
 }
