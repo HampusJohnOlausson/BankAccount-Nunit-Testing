@@ -33,5 +33,21 @@ namespace Bank.NunitTests
             Assert.AreEqual(500, account.Balance);
 
         }
+
+        [Test]
+        public void Transfering_Funds_Updates_Balance()
+        {
+            // Arrange
+            var account = new BankAccount(1000);
+            var otherAccount = new BankAccount();
+
+            // Act
+            account.TransferFundsTo(otherAccount, 500);
+
+            // Assert
+            Assert.AreEqual(500, account.Balance);
+            Assert.AreEqual(500, otherAccount.Balance);
+
+        }
     }
 }
