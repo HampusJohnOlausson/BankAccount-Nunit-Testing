@@ -56,6 +56,16 @@ namespace Bank.NunitTests
         }
 
         [Test]
+        public void Withdrawing_More_Than_Balance_Throws()
+        {
+            // Arrange
+            var account = new BankAccount(1000);
+
+            // Act + Assert
+            Assert.Throws<ArgumentOutOfRangeException>(() => account.Withdraw(-2000));
+        }
+
+        [Test]
         public void Transfering_Funds_Updates_Balance()
         {
             // Arrange
