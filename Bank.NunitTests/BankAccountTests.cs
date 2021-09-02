@@ -6,12 +6,18 @@ namespace Bank.NunitTests
 {
     public class BackAccountTests
     {
-        
+        private BankAccount account;
+
+        [Setup]
+        public void Setup()
+        {
+            // Arrange
+            account = new BankAccount(1000);
+        }
+
         [Test]
         public void Adding_Funds_Updates_Balance()
         {
-            // Arrange
-            var account = new BankAccount(1000);
 
             // Act
             account.Add(500);
@@ -24,8 +30,6 @@ namespace Bank.NunitTests
         [Test]
         public void Adding_Negative_Funds_Throws()
         {
-            // Arrange
-            var account = new BankAccount(1000);
 
             // Act + Assert
             Assert.Throws<ArgumentOutOfRangeException>(() => account.Add(-500));
@@ -34,8 +38,6 @@ namespace Bank.NunitTests
         [Test]
         public void Withdrawing_Funds_Updates_Balance()
         {
-            // Arrange
-            var account = new BankAccount(1000);
 
             // Act
             account.Withdraw(500);
@@ -48,8 +50,6 @@ namespace Bank.NunitTests
         [Test]
         public void Withdrawing_Negative_Funds_Throws()
         {
-            // Arrange
-            var account = new BankAccount(1000);
 
             // Act + Assert
             Assert.Throws<ArgumentOutOfRangeException>(() => account.Withdraw(-500));
@@ -58,8 +58,6 @@ namespace Bank.NunitTests
         [Test]
         public void Withdrawing_More_Than_Balance_Throws()
         {
-            // Arrange
-            var account = new BankAccount(1000);
 
             // Act + Assert
             Assert.Throws<ArgumentOutOfRangeException>(() => account.Withdraw(-2000));
@@ -69,7 +67,6 @@ namespace Bank.NunitTests
         public void Transfering_Funds_Updates_Balance()
         {
             // Arrange
-            var account = new BankAccount(1000);
             var otherAccount = new BankAccount();
 
             // Act
@@ -79,6 +76,14 @@ namespace Bank.NunitTests
             Assert.AreEqual(500, account.Balance);
             Assert.AreEqual(500, otherAccount.Balance);
 
+        }
+
+        [Test]
+        public void Transfer_To_Non_Existing_Account_Throws()
+        {
+
+            // Act + Assert
+            Assert.Throws<ArgumentNullException>(() => account.TransferFundsTo(null, 2000));
         }
     }
 }
