@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Bank;
+using System;
 
 namespace Bank.NunitTests
 {
@@ -18,6 +19,16 @@ namespace Bank.NunitTests
             // Assert
             Assert.AreEqual(1500, account.Balance);
 
+        }
+
+        [Test]
+        public void Adding_Negative_Funds_Updates_Balance()
+        {
+            // Arrange
+            var account = new BankAccount(1000);
+
+            // Act + Assert
+            Assert.Throws<ArgumentOutOfRangeException>(() => account.Add(-500));
         }
 
         [Test]
