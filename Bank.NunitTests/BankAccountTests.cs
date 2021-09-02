@@ -22,7 +22,7 @@ namespace Bank.NunitTests
         }
 
         [Test]
-        public void Adding_Negative_Funds_Updates_Balance()
+        public void Adding_Negative_Funds_Throws()
         {
             // Arrange
             var account = new BankAccount(1000);
@@ -43,6 +43,16 @@ namespace Bank.NunitTests
             // Assert
             Assert.AreEqual(500, account.Balance);
 
+        }
+
+        [Test]
+        public void Withdrawing_Negative_Funds_Throws()
+        {
+            // Arrange
+            var account = new BankAccount(1000);
+
+            // Act + Assert
+            Assert.Throws<ArgumentOutOfRangeException>(() => account.Withdraw(-500));
         }
 
         [Test]
